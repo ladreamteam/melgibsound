@@ -13,7 +13,7 @@ module.exports = function (grunt) {
                 options: {
                     compress: true,
                     verbose: true,
-                    banner: '// ==UserScript==\n// @name <%= pkg.name %>\n// @namespace <%= pkg.homepage %>\n// @match *://*.facebook.com*\n// @version <%= pkg.version %>\n// @grant none\n// ==/UserScript==\n'
+                    banner: '// ==UserScript==\n// @name <%= pkg.name %>\n// @namespace <%= pkg.homepage %>\n// @include *://*.facebook.com*\n// @version <%= pkg.version %>\n// @grant none\n// ==/UserScript==\n'
                 },
                 files: [
                     {
