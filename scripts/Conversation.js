@@ -92,7 +92,7 @@ Conversation.prototype.parseMessages = function (element) {
     var extension = '.mp3';
 
     // how to process a sound
-    var regexp = /#([A-Za-z0-9_-]+)/i;
+    var regexp = /#s:([A-Za-z0-9_-]+)/i;
     var replace = '<audio controls style="width:50%" src="' + url + '\$1' + extension + '" type="audio/mpeg"></audio>';
 
     for (var i = 0; i < messages.length; i++) {
