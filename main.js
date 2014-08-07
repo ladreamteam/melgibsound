@@ -1,3 +1,5 @@
+// todo: browserify add a line that fires twice "load"/"ready" events
+
 (function () {
     window.addEventListener(
         'load',
@@ -5,9 +7,12 @@
             window.MELGIBSOUND_DEBUG = false;
 
             // init script
-            var Dock = require('./scripts/Dock.js');
-            window.MELGIBSOUND_DOCK = window.MELGIBSOUND_DOCK || new Dock;
-            window.MELGIBSOUND_DOCK.init();
-        }
+            if (!window.MELGIBSOUND_DOCK) {
+                var Dock = require('./scripts/Dock.js');
+                window.MELGIBSOUND_DOCK = new Dock;
+                window.MELGIBSOUND_DOCK.init();
+            }
+        },
+        false
     );
 })();
