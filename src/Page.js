@@ -84,7 +84,7 @@ Page.prototype.changeConversation = function () {
     this.conversation = conversation;
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log('MELGIBSOUND: Conversation added.');
+        console.log('MELGIBSOUND: Conversation added.', conversation);
     }
 
     // start processing
@@ -109,6 +109,22 @@ Page.prototype.init = function () {
     // or removed conversation
     var observer = this.getObserver();
     observer.observe(element[0], this.getObserverConfiguration())
+};
+
+/**
+ * Destroys the Page
+ */
+Page.prototype.destroy = function () {
+    'use strict';
+
+    var observer = this.getObserver();
+    observer.disconnect();
+
+    this.conversation.removed();
+
+    delete this.element;
+    delete this.observer;
+    delete this.conversation;
 };
 
 module.exports = Page;

@@ -87,17 +87,24 @@ Dock.prototype.addConversation = function (element) {
     if (!this.conversations[key]) {
         // create a new Conversation on this element
         element = $(element.find('div.conversation')[0].firstChild);
-        var conversation = new Conversation(element);
 
-        // store it the array of handled conversations
-        this.conversations[key] = conversation;
+        // TODO: fix this
+        // it happens when a docked conversation is closed (on page load)
+        // the conversation does not have a first child on div.conversation
+        // we should be able to find a fix for that
+        if (element[0]) {
+            var conversation = new Conversation(element);
 
-        if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('MELGIBSOUND: Conversation ' + key + ' added.');
+            // store it the array of handled conversations
+            this.conversations[key] = conversation;
+
+            if (window.MELGIBSOUND_DEBUG === true) {
+                console.log('MELGIBSOUND: Conversation ' + key + ' added.', this.conversations);
+            }
+
+            // start processing
+            conversation.added();
         }
-
-        // start processing
-        conversation.added();
     }
 };
 
@@ -120,7 +127,7 @@ Dock.prototype.removeConversation = function (element) {
         delete this.conversations[key];
 
         if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('MELGIBSOUND: Conversation ' + key + ' removed.');
+            console.log('MELGIBSOUND: Conversation ' + key + ' removed.', this.conversations);
         }
 
         // start processing
@@ -137,11 +144,11 @@ Dock.prototype.init = function () {
     // get the element
     var element = this.getElement();
 
-    // already opened conversation
+    // already existing conversation
     var children = element.children();
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log('MELGIBSOUND: ' + children.length + ' opened conversation(s) found.');
+        console.log('MELGIBSOUND: ' + children.length + ' conversation(s) found.', children);
     }
 
     for (var i = 0; i < children.length; i++) {
@@ -153,6 +160,24 @@ Dock.prototype.init = function () {
     // or removed conversation
     var observer = this.getObserver();
     observer.observe(element[0], this.getObserverConfiguration())
+};
+
+/**
+ * Destroys the Dock
+ */
+Dock.prototype.destroy = function () {
+    'use strict';
+
+    var observer = this.getObserver();
+    observer.disconnect();
+
+    this.conversations.forEach(function (conversation) {
+        this.removeConversation(conversation.getElement()[0]);
+    });
+
+    delete this.element;
+    delete this.observer;
+    delete this.conversation;
 };
 
 module.exports = Dock;

@@ -84,7 +84,7 @@ Conversation.prototype.parseMessages = function (element) {
     var messages = element.find('span.null');
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log('MELGIBSOUND: ' + messages.length + ' messages found.');
+        console.log('MELGIBSOUND: ' + messages.length + ' messages found.', messages);
     }
 
     // where to find the sound
