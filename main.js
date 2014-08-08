@@ -24,13 +24,12 @@
                 window.MELGIBSOUND_PAGE.init();
             }
         }
-        else {
-            // init script
-            if (!window.MELGIBSOUND_DOCK) {
-                var Dock = require('./src/Dock');
-                window.MELGIBSOUND_DOCK = new Dock;
-                window.MELGIBSOUND_DOCK.init();
-            }
+
+        // init script for the dock anyway
+        if (!window.MELGIBSOUND_DOCK) {
+            var Dock = require('./src/Dock');
+            window.MELGIBSOUND_DOCK = new Dock;
+            window.MELGIBSOUND_DOCK.init();
         }
     };
 
