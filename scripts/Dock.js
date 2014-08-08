@@ -93,7 +93,7 @@ Dock.prototype.addConversation = function (element) {
         this.conversations[key] = conversation;
 
         if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('Conversation ' + key + ' added.');
+            console.log('MELGIBSOUND: Conversation ' + key + ' added.');
         }
 
         // start processing
@@ -120,7 +120,7 @@ Dock.prototype.removeConversation = function (element) {
         delete this.conversations[key];
 
         if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('Conversation ' + key + ' removed.');
+            console.log('MELGIBSOUND: Conversation ' + key + ' removed.');
         }
 
         // start processing
@@ -141,7 +141,7 @@ Dock.prototype.init = function () {
     var children = element.children();
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log(children.length + ' opened conversation(s) found.');
+        console.log('MELGIBSOUND: ' + children.length + ' opened conversation(s) found.');
     }
 
     for (var i = 0; i < children.length; i++) {
