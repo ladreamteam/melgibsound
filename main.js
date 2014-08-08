@@ -9,7 +9,7 @@
     var $ = require('jquery');
 
     /**
-     * Start function to init the script
+     * Function which starts the script
      */
     var melgibsound = function () {
         window.MELGIBSOUND_DEBUG = false;
