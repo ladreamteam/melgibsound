@@ -1,10 +1,15 @@
-// todo: browserify add a line that fires twice "load"/"ready" events
-
 (function () {
+
+    // Don't run on frames or iframes
+    if (window.top != window.self) {
+        return;
+    }
+
+    // else start!
     window.addEventListener(
         'load',
         function () {
-            window.MELGIBSOUND_DEBUG = false;
+            window.MELGIBSOUND_DEBUG = true;
 
             // init script
             if (!window.MELGIBSOUND_DOCK) {
