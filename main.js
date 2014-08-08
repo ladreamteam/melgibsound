@@ -6,10 +6,10 @@
     }
 
     // else start!
-    window.addEventListener(
-        'load',
+    var $ = require('jquery');
+    $(document).ready(
         function () {
-            window.MELGIBSOUND_DEBUG = true;
+            window.MELGIBSOUND_DEBUG = false;
 
             // init script
             if (!window.MELGIBSOUND_DOCK) {
@@ -17,7 +17,6 @@
                 window.MELGIBSOUND_DOCK = new Dock;
                 window.MELGIBSOUND_DOCK.init();
             }
-        },
-        false
+        }
     );
 })();
