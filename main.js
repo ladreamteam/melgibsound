@@ -11,7 +11,7 @@
 
         // init script
         if (!window.MELGIBSOUND_DOCK) {
-            var Dock = require('./scripts/Dock.js');
+            var Dock = require('./src/Dock');
             window.MELGIBSOUND_DOCK = new Dock;
             window.MELGIBSOUND_DOCK.init();
         }
