@@ -18,7 +18,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: 'dist/main.pack.js',
-                        dest: 'dist/main.js'
+                        dest: 'dist/<%= pkg.version %>.js'
                     }
                 ]
             }
