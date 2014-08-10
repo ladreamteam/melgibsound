@@ -86,7 +86,7 @@ Conversation.prototype.parseMessages = function (element) {
     var messages = element.find('span.null');
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log('MELGIBSOUND: ' + messages.length + ' messages found.', messages);
+        console.info('MELGIBSOUND: ' + messages.length + ' messages found.', messages);
     }
 
     // processSound for each msg
@@ -109,7 +109,7 @@ Conversation.prototype.processSound = function (message, sound) {
     'use strict';
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log('MELGIBSOUND: Sound synthax found. Sound ' + sound + ' identified.', message);
+        console.info('MELGIBSOUND: Sound synthax found. Sound ' + sound + ' identified.', message);
     }
 
     // where to find the sound
@@ -125,7 +125,7 @@ Conversation.prototype.processSound = function (message, sound) {
         onload: function (response) {
             if (response.status === 200) {
                 if (window.MELGIBSOUND_DEBUG === true) {
-                    console.log('MELGIBSOUND: Sound ' + response.context.sound + ' incrusted!');
+                    console.info('MELGIBSOUND: Sound ' + response.context.sound + ' incrusted!');
                 }
 
                 // replace the sound

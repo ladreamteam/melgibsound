@@ -18,7 +18,7 @@
             // init script
             if (window.MELGIBSOUND_PAGE) {
                 if (window.MELGIBSOUND_DEBUG === true) {
-                    console.log('MELGIBSOUND: Page deleted.');
+                    console.info('MELGIBSOUND: Page deleted.');
                 }
 
                 window.MELGIBSOUND_PAGE.destroy();
@@ -26,7 +26,7 @@
             }
 
             if (window.MELGIBSOUND_DEBUG === true) {
-                console.log('MELGIBSOUND: Page added.');
+                console.info('MELGIBSOUND: Page added.');
             }
 
             var Page = require('./src/Page');
@@ -37,7 +37,7 @@
         // init script for the dock anyway
         if (window.MELGIBSOUND_DOCK) {
             if (window.MELGIBSOUND_DEBUG === true) {
-                console.log('MELGIBSOUND: Dock deleted.');
+                console.info('MELGIBSOUND: Dock deleted.');
             }
 
             window.MELGIBSOUND_DOCK.destroy();
@@ -59,14 +59,14 @@
     // the script after every thing is loaded.
     if ((/chrome/i).test(navigator.userAgent)) {
         if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('MELGIBSOUND: Chrome detected.');
+            console.info('MELGIBSOUND: Chrome detected.');
         }
 
         $(document).ready(melgibsound);
     }
     else {
         if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('MELGIBSOUND: !Chrome detected.');
+            console.info('MELGIBSOUND: !Chrome detected.');
         }
 
         // atm: for others (ff tested), use window is enough.

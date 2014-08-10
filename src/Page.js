@@ -74,7 +74,7 @@ Page.prototype.changeConversation = function () {
 
     if (this.conversation !== null) {
         if (window.MELGIBSOUND_DEBUG === true) {
-            console.log('MELGIBSOUND: Conversation removed.');
+            console.info('MELGIBSOUND: Conversation removed.');
         }
 
         this.conversation.removed();
@@ -84,7 +84,7 @@ Page.prototype.changeConversation = function () {
     this.conversation = conversation;
 
     if (window.MELGIBSOUND_DEBUG === true) {
-        console.log('MELGIBSOUND: Conversation added.', conversation);
+        console.info('MELGIBSOUND: Conversation added.', conversation);
     }
 
     // start processing
