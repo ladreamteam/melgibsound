@@ -29,7 +29,7 @@ Dock.prototype.getElement = function () {
     'use strict';
 
     if (this.element === null) {
-        this.element = $('.fbNubGroup.clearfix.videoCallEnabled');
+        this.element = $(unsafeWindow.document.querySelector('.fbNubGroup.clearfix.videoCallEnabled'));
     }
 
     return this.element;
