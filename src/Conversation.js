@@ -20,6 +20,9 @@ function Conversation(element, observer) {
 
     // Observer
     this.observer = observer || null;
+
+    // Regex
+    this.soundRegex = /#s:([A-Za-z0-9_-]+)/i;
 }
 
 /**
@@ -72,8 +75,7 @@ Conversation.prototype.getObserverConfiguration = function () {
 };
 
 /**
- * Search for span.null to replace #mySound
- * into a audio tag.
+ * Searches for span.null
  *
  * @param element
  */
@@ -87,18 +89,54 @@ Conversation.prototype.parseMessages = function (element) {
         console.log('MELGIBSOUND: ' + messages.length + ' messages found.', messages);
     }
 
+    // processSound for each msg
+    for (var i = 0; i < messages.length; i++) {
+        var sound = this.soundRegex.exec(messages[i].innerHTML);
+        if (sound !== null) {
+            this.processSound(messages[i], sound[1]);
+        }
+    }
+};
+
+/**
+ * Checks if sounds exists and replace with an audio tag
+ * nothing otherwise.
+ *
+ * @param message
+ * @param sound
+ */
+Conversation.prototype.processSound = function (message, sound) {
+    'use strict';
+
+    if (window.MELGIBSOUND_DEBUG === true) {
+        console.log('MELGIBSOUND: Sound synthax found. Sound ' + sound + ' identified.', message);
+    }
+
     // where to find the sound
     var url = 'https://tzouille.no-ip.org/soundbox/mp3/';
     var extension = '.mp3';
 
-    // how to process a sound
-    var regexp = /#s:([A-Za-z0-9_-]+)/i;
-    var replace = '<audio controls style="width: 150px;" src="' + url + '\$1' + extension + '" type="audio/mpeg"></audio>';
+    // use GM to make an HTTP request
+    // more flexible than jQuery
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: url + sound + extension,
+        context: {'url': url, 'sound': sound, 'extension': extension, 'regex': this.soundRegex, 'message': message },
+        onload: function (response) {
+            if (response.status === 200) {
+                if (window.MELGIBSOUND_DEBUG === true) {
+                    console.log('MELGIBSOUND: Sound ' + response.context.sound + ' incrusted!');
+                }
 
-    for (var i = 0; i < messages.length; i++) {
-        var html = messages[i].innerHTML;
-        messages[i].innerHTML = html.replace(regexp, replace);
-    }
+                // replace the sound
+                response.context.message.innerHTML = response.context.message.innerHTML.replace(
+                    response.context.regex,
+                        '<audio controls style="width: 150px;" src="'
+                        + response.context.url + '\$1' + response.context.extension + '" type="audio/mpeg"></audio>'
+                );
+            }
+        }
+    });
 };
 
 /**
